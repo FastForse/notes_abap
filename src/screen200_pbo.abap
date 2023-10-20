@@ -11,7 +11,7 @@ MODULE status_0200 OUTPUT.
 * SET TITLEBAR 'xxx'.
 
   CLEAR note_line.
-  READ TABLE it_notes WITH KEY id_row = list_lab INTO note_line.      "######## ######## ####### # title_id
+  READ TABLE it_notes WITH KEY id_row = list_lab INTO note_line.      "Получаем название заметки и title_id
 
   IF editor_view IS INITIAL.
     repid = sy-repid.
@@ -37,12 +37,12 @@ MODULE status_0200 OUTPUT.
 
   LOOP AT it_notes INTO note_line WHERE title_id = LIST_LAB .
 
-    APPEND note_line-content TO text_tab.                       "######### text_tab ######## ## it_notes #####
-                                                                "###### #######
+    APPEND note_line-content TO text_tab.                       "Заполняем text_tab строками из it_notes одной
+                                                                "нужной заметки
     ENDLOOP.
 
-  editor_view->set_text_as_stream( EXPORTING text = text_tab ). "######### ########## text_tab # #### textedit
+  editor_view->set_text_as_stream( EXPORTING text = text_tab ). "Вставляем содержание text_tab в окно textedit
 
-  view_title = note_line-title.                                 "########## ######## #######
+  view_title = note_line-title.                                 "Отображаем название заметки
 
 ENDMODULE.

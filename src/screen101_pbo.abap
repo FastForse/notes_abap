@@ -14,13 +14,13 @@ MODULE status_0101 OUTPUT.
   CLEAR values.
   CLEAR it_titles.
 
-  LOOP AT it_notes INTO note_line.                              "######### ####### it_titles
+  LOOP AT it_notes INTO note_line.                              "Заполняем таблицу it_titles
     title_exists = abap_false.
     READ TABLE it_titles WITH KEY
-    title_id = note_line-title_id TRANSPORTING NO FIELDS.       "####### ######### ###### # ###### title_id
+    title_id = note_line-title_id TRANSPORTING NO FIELDS.       "Пробуем прочитать строку с нужным title_id
 
     IF sy-subrc <> 0.
-      titles_line-title_id = note_line-title_id.                "#### ###### ###### ### - #########
+      titles_line-title_id = note_line-title_id.                "Если нужной строки нет - добавляем
       titles_line-title    = note_line-title.
       APPEND titles_line TO it_titles.
     ENDIF.
@@ -29,7 +29,7 @@ MODULE status_0101 OUTPUT.
   param = 'LIST_LAB'.
   LOOP AT it_titles INTO titles_line.
 
-    value-key = titles_line-title_id.                           "######### values ### ####### # List Box
+    value-key = titles_line-title_id.                           "Заполняем values для вставки в List Box
     value-text = titles_line-title.
 
     APPEND value TO values.

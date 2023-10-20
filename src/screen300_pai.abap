@@ -12,9 +12,9 @@ MODULE user_command_0300 INPUT.
     WHEN 'NEW'.
       CALL METHOD editor_new->get_text_as_r3table
         IMPORTING
-          table = text_tab.                         "######### ##### ### R/3 table
+          table = text_tab.                         "Сохраняем текст как R/3 table
 
-      LOOP AT it_notes INTO note_line.              "######## ######### ######
+      LOOP AT it_notes INTO note_line.              "Получаем последнюю строку
       ENDLOOP.
 
       note_line-title = input_title.
@@ -22,7 +22,7 @@ MODULE user_command_0300 INPUT.
       note_line-title_id = note_line-title_id + 1.
 
       LOOP AT text_tab INTO text_tab_line.
-        note_line-content = text_tab_line.          "######### ###### # ##### ####### ## text_tab
+        note_line-content = text_tab_line.          "Вставляем строку с новым текстом из text_tab
 
         APPEND note_line TO it_notes.
 
@@ -37,10 +37,10 @@ MODULE user_command_0300 INPUT.
           ROLLBACK WORK.
         ENDIF.
 
-        note_line-id_row = note_line-id_row + 1.    "######### ###### ###### ##### id_row + 1
+        note_line-id_row = note_line-id_row + 1.    "Следующая запись должна иметь id_row + 1
       ENDLOOP.
 
-      MESSAGE '####### ####### #######' TYPE 'S'.
+      MESSAGE 'Заметка успешно создана' TYPE 'S'.
       SET SCREEN 101.
     WHEN 'BACK'.
       SET SCREEN 101.

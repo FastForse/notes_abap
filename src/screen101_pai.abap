@@ -9,10 +9,10 @@
 MODULE user_command_0101 INPUT.
   CASE sy-ucomm.
     WHEN 'DEL'.
-      DELETE it_notes                             "####### ####### ## itab it_notes
+      DELETE it_notes                             "Удаляем заметку из itab it_notes
       WHERE title_id = list_lab.
 
-      DELETE FROM znotes_table                    "####### ####### ## ####### tab
+      DELETE FROM znotes_table                    "Удаляем заметку из внешней tab
       WHERE title_id = list_lab.
 
       IF sy-subrc = 0.
@@ -21,7 +21,7 @@ MODULE user_command_0101 INPUT.
         ROLLBACK WORK.
       ENDIF.
 
-      MESSAGE '####### ####### #######' TYPE 'S'.
+      MESSAGE 'Заметка успешно удалена' TYPE 'S'.
       SET SCREEN 101.
     WHEN 'EXIT'.
       SET SCREEN 0.
